@@ -49,7 +49,7 @@
         </dependency>
         <dependency>
             <groupId>com.julianpeeters</groupId>
-            <artifactId>avrohugger-core_2.11</artifactId>
+            <artifactId>avrohugger-core_2.10</artifactId>
             <version>0.12.2-SNAPSHOT</version>
         </dependency>
         <dependency>
