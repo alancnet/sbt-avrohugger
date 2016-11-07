@@ -8,12 +8,13 @@ object build extends Build {
     base = file("."),
     settings = Defaults.defaultSettings ++ scriptedSettings ++ Seq[Project.Setting[_]](
       organization := "com.julianpeeters",
-      version := "0.12.1",
+      version := "0.12.2-SNAPSHOT",
       sbtPlugin := true,
       scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-Ywarn-value-discard"),
       resolvers += Resolver.file("Local Ivy Repository", file(Path.userHome.absolutePath + "/.ivy2/local/"))(Resolver.ivyStylePatterns),
+      resolvers += "Github alancnet avrohugger" at "https://alancnet.github.io/avrohugger/maven",
       libraryDependencies ++= Seq(
-        "com.julianpeeters" % "avrohugger-core_2.10" % "0.12.1",
+        "com.julianpeeters" % "avrohugger-core_2.11" % "0.12.2-SNAPSHOT",
         "io.spray" %%  "spray-json" % "1.3.2",
         "org.specs2" %% "specs2-core" % "3.6.4" % "test"),
       scalaVersion := "2.10.5",
@@ -24,7 +25,8 @@ object build extends Build {
       publishTo <<= version { (v: String) =>
         val nexus = "https://oss.sonatype.org/"
         if (v.trim.endsWith("SNAPSHOT"))
-          Some("snapshots" at nexus + "content/repositories/snapshots")
+          Some(Resolver.file("file", new File("/mnt/c/Users/alco/git/sbt-avrohugger/maven")))
+          //Some("snapshots" at nexus + "content/repositories/snapshots")
         else
           Some("releases" at nexus + "service/local/staging/deploy/maven2")
       },
